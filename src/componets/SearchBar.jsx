@@ -22,15 +22,16 @@ const SearchBar = ({ onSearch, currentSearchTerm }) => {
     };
 
     return (
-        <div>
+        <div class="input-group w-50">
             <input
+                class="form-control"
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 placeholder="search contact"
             />
-            <button onClick={handleSearchClick}>Search</button>
+            <button onClick={handleSearchClick}  class="btn btn-success" id="button-addon2">Search</button>
         </div>
     );
 };

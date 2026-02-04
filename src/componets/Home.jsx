@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
 import { IoMdAddCircle } from "react-icons/io";
+import "../assets/css/custom.css";
+import "../assets/css/bootstrap.css";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -29,7 +31,6 @@ const Home = () => {
     dataFetch();
   }, []);
 
-   
   useEffect(() => {
     if (currentSearchTerm.trim() === "") {
       applyFilter(data, filterType);
@@ -45,21 +46,16 @@ const Home = () => {
     const term = searchTerm.toLowerCase().trim();
 
     return contacts.filter((contact) => {
-      
       if (contact.firstName?.toLowerCase().includes(term)) return true;
 
-      
       if (contact.lastName?.toLowerCase().includes(term)) return true;
 
-      
       const fullName =
         `${contact.firstName || ""} ${contact.lastName || ""}`.toLowerCase();
       if (fullName.includes(term)) return true;
 
-       
       if (contact.email?.toLowerCase().includes(term)) return true;
 
-      
       if (contact.phone?.toLowerCase().includes(term)) return true;
 
       return false;
@@ -94,23 +90,19 @@ const Home = () => {
 
     switch (filter) {
       case "fastName-asc":
-        
         sortedContacts.sort((a, b) =>
           (a.firstName || "").localeCompare(b.firstName || ""),
         );
         break;
       case "lastname-asc":
-       
         sortedContacts.sort((a, b) =>
           (a.lastName || "").localeCompare(b.lastName || ""),
         );
         break;
       case "oldest":
-         
         sortedContacts.sort((a, b) => (a.id || 0) - (b.id || 0));
         break;
       default:
-        
         break;
     }
 
@@ -129,7 +121,7 @@ const Home = () => {
 
         if (response.ok) {
           alert("User deleted successfully!");
-           
+
           const updatedData = data.filter((user) => user.id !== id);
           setData(updatedData);
         } else {
@@ -142,84 +134,123 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Link>My Contact App</Link>
-      <h1>All Contact</h1>
-
-      <div>
-        <SearchBar
-          onSearch={handleSearch}
-          currentSearchTerm={currentSearchTerm}
-        />
-      </div>
-      <Link to="/create" style={{display:"flex", alignItems:"center"}}><IoMdAddCircle/> New</Link>
-      <div style={{display:"flex", alignItems:"center"}}>
-          <FaFilter/>
-          <h2 style={{margin:2}}>Filter</h2>
+    <>
+      <nav class="navbar navbar-expand-lg navbar-light container sm-w-100">
+        <div class="container">
+          <Link to="/" class="navbar-brand text-uppercase text-success">
+            <strong>
+              My Contact App
+            </strong>
+          </Link>
         </div>
-      <div>
-        <FilterDropdown
-          onFilterChange={handleFilterChange}
-          currentFilter={filterType}
-        />
-      </div>
+      </nav>
+      <main class="py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-title bg-primary mb-4">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h1>All Contact</h1>
+                    <div class="input-group w-50">
+                      <SearchBar
+                        onSearch={handleSearch}
+                        currentSearchTerm={currentSearchTerm}
+                      />
+                    </div>
+                    <Link to="/create" class="btn btn-success">
+                      <IoMdAddCircle /> Add
+                    </Link>
+                  </div>
+                </div>
 
-      {
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayedContacts.length > 0 ? (
-                displayedContacts.map((contact, i) => (
-                  <tr key={contact.id || i}>
-                    <td>{i + 1}</td>
-                    <td>{contact.firstName}</td>
-                    <td>{contact.lastName}</td>
-                    <td>{contact.email}</td>
-                    <td>{contact.phone}</td>
-                    <td>
-                      <Link
-                        to={`/read/${contact.id}`}
-                        style={{ marginRight: "10px" }}
-                      >
-                        <CiRead />
-                      </Link>
-                      <Link to={`/update/${contact.id}`}>
-                        <FaRegEdit />
-                      </Link>
-                      <Link onClick={() => deleteUser(contact.id)}>
-                        <ImCross />
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td>
-                    {searchPerformed ? (
-                      <div>
-                        <p>No Contact Information</p>
-                      </div>
-                    ) : (
-                      <p>No contacts available</p>
-                    )}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                <div class="d-flex align-items-center justify-content-between px-3">
+                  <div class="d-flex align-items-center">
+                    <div class="filter-icon"><FaFilter /></div>
+                    <h2 >Filter</h2>
+                  </div>
+                  <div>
+                    <FilterDropdown
+                      onFilterChange={handleFilterChange}
+                      currentFilter={filterType}
+                    />
+                  </div>
+                </div>
+
+                {
+                  <div class="card-body">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Phone</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {displayedContacts.length > 0 ? (
+                          displayedContacts.map((contact, i) => (
+                            <tr key={contact.id || i}>
+                              <td>{i + 1}</td>
+                              <td>{contact.firstName}</td>
+                              <td>{contact.lastName}</td>
+                              <td>{contact.email}</td>
+                              <td>{contact.phone}</td>
+                              <td>
+                                <Link
+                                  to={`/read/${contact.id}`}
+                                  class="btn btn-sm btn-circle btn-outline-info"
+                                >
+                                  <CiRead />
+                                </Link>
+                                <Link
+                                  to={`/update/${contact.id}`}
+                                  class="btn btn-sm btn-circle btn-outline-secondary"
+                                >
+                                  <FaRegEdit />
+                                </Link>
+                                <Link
+                                  onClick={() => deleteUser(contact.id)}
+                                  class="btn btn-sm btn-circle btn-outline-danger"
+                                >
+                                  <ImCross />
+                                </Link>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td
+                              colSpan="6"
+                              style={{ textAlign: "center", padding: "20px" }}
+                            >
+                              {searchPerformed ? (
+                                <div>
+                                  <p>No Contact Information</p>
+                                </div>
+                              ) : (
+                                <p>No contacts available</p>
+                              )}
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
         </div>
-      }
-    </div>
+      </main>
+
+       <div class="footer text-center bg-body-tertiary container ">
+        <p>No More @ back to Home</p>
+       </div>
+    </>
   );
 };
 

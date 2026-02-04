@@ -23,7 +23,8 @@ body {
 }
 
 .filter-icon{
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
   color: green;
 }
 
@@ -50,7 +51,7 @@ body {
   background: #435d7d;
   padding: 16px 20px;
 }
-
+ 
 .footer {
   background-color: #435d7d;
   color: #f7f7f7;
