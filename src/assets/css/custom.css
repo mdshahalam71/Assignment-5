@@ -55,8 +55,22 @@ body {
 .footer {
   background-color: #435d7d;
   color: #f7f7f7;
+  text-align: center;
 }
 
 .footer a {
   color: #d9d9d9;
+}
+
+@media (max-width: 767px) {
+     
+    .footer{
+      width: 263%;
+    }
+    .navbar{
+      width: 263%;
+    }
+    .card{
+      width: 263%;
+    }
 }

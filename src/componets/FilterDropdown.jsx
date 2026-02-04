@@ -7,7 +7,7 @@ const FilterDropdown = ({ onFilterChange, currentFilter }) => {
   };
 
   return (
-    <div class="">
+    <div >
       <select value={currentFilter} onChange={handleChange} class="form-select" aria-label="Default select example">
         <option value="default">Default</option>
         <option value="fastName-asc">First Name (A → Z)</option>

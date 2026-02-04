@@ -135,7 +135,7 @@ const Home = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light container sm-w-100">
+      <nav class="navbar navbar-expand-lg navbar-light container sm-col-12">
         <div class="container">
           <Link to="/" class="navbar-brand text-uppercase text-success">
             <strong>
@@ -247,7 +247,7 @@ const Home = () => {
         </div>
       </main>
 
-       <div class="footer text-center bg-body-tertiary container ">
+       <div class="footer ">
         <p>No More @ back to Home</p>
        </div>
     </>

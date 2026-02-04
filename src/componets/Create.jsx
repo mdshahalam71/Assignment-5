@@ -116,7 +116,7 @@ export const Create = () => {
         </div>
       </main>
 
-      <div class="footer text-center bg-body-tertiary container">
+      <div class="footer">
         <p>No More @ back to Home</p>
        </div>
     </>
